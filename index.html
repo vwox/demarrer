@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<title>Installer GitHub avec Claude</title>
+<style>
+  :root {
+    --fond: #f7f5f0; --carte: #ffffff; --texte: #1f2328; --doux: #5b6168;
+    --accent: #232b5e; --accent-texte: #ffffff; --bord: #e2ded4; --encart: #f1eee6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fond: #15171c; --carte: #1e2128; --texte: #e8e6e1; --doux: #a3a7ad;
+      --accent: #c9d1ff; --accent-texte: #15171c; --bord: #33363e; --encart: #262a32;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fond); color: var(--texte);
+    font: 18px/1.55 -apple-system, "Segoe UI", system-ui, Roboto, Arial, sans-serif;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  .sous-titre { color: var(--doux); margin: 0 0 28px; }
+  .carte {
+    background: var(--carte); border: 1px solid var(--bord); border-radius: 14px;
+    padding: 22px 20px; margin-bottom: 20px;
+  }
+  .bouton {
+    display: block; text-align: center; text-decoration: none; font-weight: 600;
+    background: var(--accent); color: var(--accent-texte); border: 0; border-radius: 12px;
+    padding: 18px 16px; font-size: 1.15rem; width: 100%; cursor: pointer;
+  }
+  .bouton.second { background: transparent; color: var(--texte); border: 1.5px solid var(--bord); font-size: 1rem; padding: 12px 16px; }
+  ol { padding-left: 1.3em; margin: 18px 0 0; }
+  li { margin-bottom: 10px; }
+  li:last-child { margin-bottom: 0; }
+  h2 { font-size: 1.05rem; margin: 0 0 10px; }
+  .demande {
+    background: var(--encart); border-radius: 10px; padding: 14px 16px; margin: 12px 0 14px;
+    font-size: 0.95rem; white-space: pre-wrap;
+  }
+  .ok { color: var(--doux); font-size: 0.95rem; min-height: 1.4em; margin: 8px 0 0; text-align: center; }
+  .apres { color: var(--doux); font-size: 0.95rem; margin: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Installer GitHub avec Claude</h1>
+  <p class="sous-titre">Deux minutes. Claude fait tout, vous validez.</p>
+
+  <div class="carte">
+    <a class="bouton" href="claude://code/new?q=Installe%20proprement%20sur%20mon%20PC%20GitHub%2C%20Git%20et%20ce%20qui%20peut%20%C3%AAtre%20utile%2C%20au%20bon%20endroit.%20Connecte%20mon%20compte%20GitHub%20%28pjean-baptiste-hub%2C%20d%C3%A9j%C3%A0%20connect%C3%A9%20dans%20Edge%29%2C%20accepte%20mes%20invitations%20en%20attente%20et%20r%C3%A9cup%C3%A8re%20mes%20dossiers%20%28zita%2C%20prepa%29.%20Pr%C3%A9pare%20chaque%20%C3%A9tape%20%28ouvre%20les%20pages%2C%20donne-moi%20le%20texte%20pr%C3%AAt%20%C3%A0%20copier-coller%29%20%3A%20je%20n%27ai%20qu%27%C3%A0%20valider%2C%20je%20fais%20moi-m%C3%AAme%20les%20confirmations%20et%20les%20mots%20de%20passe.%20Fais%20une%20micro-doc.%20Je%20ne%20suis%20pas%20du%20tout%20technique%20%3A%20parle-moi%20avec%20des%20mots%20ultra%20simples%2C%20en%20fran%C3%A7ais%2C%20sans%20jargon%2C%20explique%20le%20moins%20possible%2C%20ne%20m%27embrouille%20pas%20avec%20GitHub.%20Fais%20en%20sorte%20que%20tout%20reste%20propre%2C%20m%C3%AAme%20si%20mes%20demandes%20ne%20sont%20pas%20claires.%20N%27h%C3%A9site%20pas%20%C3%A0%20mettre%20d%27autres%20projets%20sur%20GitHub%20quand%20c%27est%20utile%2C%20tant%20que%20%C3%A7a%20me%20prend%20z%C3%A9ro%20temps%20et%20z%C3%A9ro%20d%C3%A9cision%20%3B%20je%20comprendrai%20plus%20tard%2C%20%C3%A0%20l%27usage.%20Synchronise%20toujours%20tout%20automatiquement%20%28un%20script%20qui%20envoie%20tout%20tout%20seul%2C%20c%27est%20parfait%29%20%3A%20jamais%20de%20branches%20ni%20de%20fusions%20compliqu%C3%A9es%2C%20jamais%20de%20question%20l%C3%A0-dessus%2C%20et%20ne%20me%20dis%20pas%20%C2%AB%20j%27ai%20pouss%C3%A9%20%C2%BB%20%3A%20c%27est%20du%20jargon.%20Note%20ces%20r%C3%A8gles%20dans%20tes%20instructions%20permanentes%20pour%20la%20suite.">Ouvrir Claude avec la demande prête</a>
+    <ol>
+      <li>Si Edge demande «&nbsp;Ouvrir Claude&nbsp;?&nbsp;», cliquez <b>Ouvrir</b>.</li>
+      <li>Si Claude demande un dossier, choisissez <b>Documents</b>.</li>
+      <li>En bas, choisissez <b>Opus 5.5</b> et l'effort <b>High</b>, puis <b>Envoyer</b>.</li>
+      <li>Ensuite, répondez <b>Oui</b> ou <b>Autoriser</b> quand Windows ou Claude le demandent, et tapez vous-même vos mots de passe.</li>
+    </ol>
+  </div>
+
+  <div class="carte">
+    <h2>Le bouton ne fait rien ?</h2>
+    <p class="apres">Copiez la demande, ouvrez l'application Claude, onglet <b>Code</b>, collez-la, puis Envoyer.</p>
+    <div class="demande" id="demande">Installe proprement sur mon PC GitHub, Git et ce qui peut être utile, au bon endroit. Connecte mon compte GitHub (pjean-baptiste-hub, déjà connecté dans Edge), accepte mes invitations en attente et récupère mes dossiers (zita, prepa). Prépare chaque étape (ouvre les pages, donne-moi le texte prêt à copier-coller) : je n&#x27;ai qu&#x27;à valider, je fais moi-même les confirmations et les mots de passe. Fais une micro-doc. Je ne suis pas du tout technique : parle-moi avec des mots ultra simples, en français, sans jargon, explique le moins possible, ne m&#x27;embrouille pas avec GitHub. Fais en sorte que tout reste propre, même si mes demandes ne sont pas claires. N&#x27;hésite pas à mettre d&#x27;autres projets sur GitHub quand c&#x27;est utile, tant que ça me prend zéro temps et zéro décision ; je comprendrai plus tard, à l&#x27;usage. Synchronise toujours tout automatiquement (un script qui envoie tout tout seul, c&#x27;est parfait) : jamais de branches ni de fusions compliquées, jamais de question là-dessus, et ne me dis pas « j&#x27;ai poussé » : c&#x27;est du jargon. Note ces règles dans tes instructions permanentes pour la suite.</div>
+    <button class="bouton second" id="copier" type="button">Copier la demande</button>
+    <p class="ok" id="ok" aria-live="polite"></p>
+  </div>
+</main>
+<script>
+  document.getElementById("copier").addEventListener("click", async () => {
+    const texte = document.getElementById("demande").innerText;
+    const ok = document.getElementById("ok");
+    try {
+      await navigator.clipboard.writeText(texte);
+      ok.textContent = "Copié. Collez-le dans Claude.";
+    } catch (e) {
+      const r = document.createRange();
+      r.selectNodeContents(document.getElementById("demande"));
+      const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      ok.textContent = "Texte sélectionné : faites Ctrl+C pour le copier.";
+    }
+  });
+</script>
+</body>
+</html>
