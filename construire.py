@@ -1,9 +1,13 @@
 """Fabrique index.html : une page qui ouvre l'application Claude avec la demande déjà écrite.
 
-Le lien claude://code/new?q=… est documenté par Anthropic (support.claude.com, article 14729294) :
-il pré-remplit l'onglet Code sans rien envoyer. Pas de paramètre pour le modèle ni l'effort.
+Les liens claude://cowork/new?q=… et claude://code/new?q=… sont documentés par Anthropic
+(support.claude.com, article 14729294) : ils pré-remplissent sans rien envoyer. Pas de paramètre pour le
+modèle ni l'effort. Bouton principal : Cowork (choix de Blaise) ; il tourne dans le cloud depuis le
+6/10/2026 mais garde la main sur le PC tant que l'application est ouverte (extensions locales, contrôle de
+l'écran en bêta). Si Cowork ne peut rien installer, la demande lui fait dire de rouvrir dans l'onglet Code,
+qui lance les commandes sur le PC : second bouton.
 On passe par une page https parce qu'Outlook supprime souvent les liens claude:// dans les mails.
-Garder le lien encodé sous ~2 000 caractères (limite connue de Windows pour ouvrir une application).
+Garder les liens encodés sous ~2 000 caractères (limite connue de Windows pour ouvrir une application).
 
 Lancer : python3 construire.py
 """
@@ -12,24 +16,27 @@ from pathlib import Path
 from urllib.parse import quote
 
 DEMANDE = (
-    "Installe proprement sur mon PC GitHub, Git et ce qui peut être utile, au bon endroit. "
-    "Connecte mon compte GitHub (pjean-baptiste-hub, déjà connecté dans Edge), accepte mes invitations "
-    "en attente et récupère mes dossiers (zita, prepa). "
-    "Prépare chaque étape (ouvre les pages, donne-moi le texte prêt à copier-coller) : je n'ai qu'à valider, "
-    "je fais moi-même les confirmations et les mots de passe. "
-    "Fais une micro-doc. Je ne suis pas du tout technique : parle-moi avec des mots ultra simples, en français, "
-    "sans jargon, explique le moins possible, ne m'embrouille pas avec GitHub. "
-    "Fais en sorte que tout reste propre, même si mes demandes ne sont pas claires. "
-    "N'hésite pas à mettre d'autres projets sur GitHub quand c'est utile, tant que ça me prend zéro temps et "
-    "zéro décision ; je comprendrai plus tard, à l'usage. "
-    "Synchronise toujours tout automatiquement (un script qui envoie tout tout seul, c'est parfait) : jamais "
-    "de branches ni de fusions compliquées, jamais de question là-dessus, et ne me dis pas « j'ai poussé » : "
-    "c'est du jargon. "
-    "Note ces règles dans tes instructions permanentes pour la suite."
+    "Installe proprement sur mon PC Git, GitHub et ce qui peut être utile (par le terminal, une extension ou "
+    "le contrôle de l'écran). "
+    "Connecte mon compte GitHub (pjean-baptiste-hub, déjà connecté dans Edge), accepte mes invitations et "
+    "récupère mes dossiers (zita, prepa). "
+    "Prépare chaque étape (pages ouvertes, texte prêt à coller) : je ne fais que valider et taper mes mots de passe. "
+    "Fais une micro-doc. Je ne suis pas du tout technique : mots ultra simples, en français, sans jargon, "
+    "le moins d'explications possible. "
+    "Garde tout propre même si mes demandes sont floues ; mets d'autres projets sur GitHub quand c'est utile, "
+    "sans me demander de décision. "
+    "Synchronise tout automatiquement (un script qui envoie tout seul, c'est parfait), sans branches ni questions, "
+    "et ne me dis jamais « j'ai poussé » : c'est du jargon. "
+    "Note ces règles dans tes instructions permanentes. "
+    "Fais un vrai test de bout en bout, puis dis-moi : « C'est bon, tout marche. Pour essayer, je peux créer ou "
+    "modifier n'importe quel site : par exemple renommer vwox.github.io/prepa en "
+    "vwox.github.io/prepa-mariage-lagrasse, ou changer sa couleur selon le temps liturgique. » "
+    "Si tu ne peux rien installer d'ici, dis-moi en une phrase de rouvrir cette demande dans l'onglet Code."
 )
 
-LIEN = "claude://code/new?q=" + quote(DEMANDE, safe="")
-assert len(LIEN) < 2000, len(LIEN)
+LIEN = "claude://cowork/new?q=" + quote(DEMANDE, safe="")
+LIEN_CODE = "claude://code/new?q=" + quote(DEMANDE, safe="")
+assert max(len(LIEN), len(LIEN_CODE)) < 2000, (len(LIEN), len(LIEN_CODE))
 
 PAGE = f"""<!doctype html>
 <html lang="fr">
@@ -67,6 +74,7 @@ PAGE = f"""<!doctype html>
     background: var(--accent); color: var(--accent-texte); border: 0; border-radius: 12px;
     padding: 18px 16px; font-size: 1.15rem; width: 100%; cursor: pointer;
   }}
+  a.bouton.second {{ text-decoration: none; }}
   .bouton.second {{ background: transparent; color: var(--texte); border: 1.5px solid var(--bord); font-size: 1rem; padding: 12px 16px; }}
   ol {{ padding-left: 1.3em; margin: 18px 0 0; }}
   li {{ margin-bottom: 10px; }}
@@ -89,15 +97,20 @@ PAGE = f"""<!doctype html>
     <a class="bouton" href="{escape(LIEN, quote=True)}">Ouvrir Claude avec la demande prête</a>
     <ol>
       <li>Si Edge demande «&nbsp;Ouvrir Claude&nbsp;?&nbsp;», cliquez <b>Ouvrir</b>.</li>
-      <li>Si Claude demande un dossier, choisissez <b>Documents</b>.</li>
       <li>En bas, choisissez <b>Opus 5.5</b> et l'effort <b>High</b>, puis <b>Envoyer</b>.</li>
       <li>Ensuite, répondez <b>Oui</b> ou <b>Autoriser</b> quand Windows ou Claude le demandent, et tapez vous-même vos mots de passe.</li>
     </ol>
   </div>
 
   <div class="carte">
-    <h2>Le bouton ne fait rien ?</h2>
-    <p class="apres">Copiez la demande, ouvrez l'application Claude, onglet <b>Code</b>, collez-la, puis Envoyer.</p>
+    <h2>Claude dit qu'il ne peut rien installer&nbsp;?</h2>
+    <p class="apres">Même demande, dans l'onglet Code de Claude, qui sait installer. Si Claude demande un dossier, choisissez <b>Documents</b>.</p>
+    <a class="bouton second" style="margin-top:14px" href="{escape(LIEN_CODE, quote=True)}">Rouvrir dans l'onglet Code</a>
+  </div>
+
+  <div class="carte">
+    <h2>Aucun bouton ne fait rien&nbsp;?</h2>
+    <p class="apres">Copiez la demande, ouvrez l'application Claude, collez-la, puis Envoyer.</p>
     <div class="demande" id="demande">{escape(DEMANDE)}</div>
     <button class="bouton second" id="copier" type="button">Copier la demande</button>
     <p class="ok" id="ok" aria-live="polite"></p>
@@ -123,4 +136,4 @@ PAGE = f"""<!doctype html>
 """
 
 Path(__file__).with_name("index.html").write_text(PAGE, encoding="utf-8")
-print(f"index.html écrit ; lien de {len(LIEN)} caractères")
+print(f"index.html écrit ; liens de {len(LIEN)} et {len(LIEN_CODE)} caractères")
